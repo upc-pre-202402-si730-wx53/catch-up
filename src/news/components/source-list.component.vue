@@ -8,10 +8,10 @@ export default {
   name: "source-list",
   components: {SourceItem},
   props: {
-    visible: Boolean
   },
   data() {
     return {
+      visible: false,
       sources: [],
       error: [],
       newsApi: new NewsApiService()
@@ -36,6 +36,9 @@ export default {
     },
     isVisible() {
       return this.visible;
+    },
+    toggleSidebar2(){
+      this.$props.visible = !this.$props.visible;
     }
   }
 }
@@ -43,7 +46,7 @@ export default {
 </script>
 
 <template>
-  <pv-drawer v-bind:visible="visible">
+  <pv-drawer v-model:visible="visible" header="CATCHUP">
     <source-item v-for="source in sources"
     :key="source.id"
     :source="source"

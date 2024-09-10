@@ -8,6 +8,7 @@ const http = axios.create({
     baseURL: 'https://newsapi.org/v2'
 });
 
+
 export class NewsApiService {
     apiKey = NEWS_API_KEY;
     logoApiService = new LogoApiService();

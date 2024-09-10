@@ -10,11 +10,15 @@ export default {
   },
   data() {
     return {
-      drawerVisible: true
+      drawerVisible: false
     }
   },
   methods: {
+    toggleSidebar() {
+      this.drawerVisible = !this.drawerVisible;
+    },
     setSource(source) {
+      this.toggleSidebar();
       console.log(source);
     }
   }
@@ -22,11 +26,12 @@ export default {
 </script>
 
 <template>
-  <div>
+  <div class="card flex justify-center">
     <div>
       <pv-menubar>
         <template #start>
-          <source-list v-model:visible="drawerVisible" v-on:source-selected="setSource"></source-list>
+          <pv-button icon="pi pi-bars" label="catchup" @click="toggleSidebar"/>
+          <source-list v-model:visible="drawerVisible" v-on:source-selected="setSource" />
         </template>
         <template #end>
           <language-swticher></language-swticher>
@@ -34,25 +39,25 @@ export default {
       </pv-menubar>
     </div>
 
-    <main>
-      <pv-card>
-        <template #header>
-          <img alt="user header" src="./assets/images/profile-pic.jpeg">
-        </template>
-        <template #title>
-          Advanced Card
-        </template>
-        <template #content>
-          {{ $t('card-content') }}
-        </template>
-        <template #footer>
-          <pv-button :label="$t('submit')" icon="pi pi-check"/>
-          <pv-button :label="$t('read-more')" class="p-button-secondary" icon="pi pi-times" label="Cancel"
-                     style="margin-left: .5em"/>
-        </template>
-      </pv-card>
-    </main>
   </div>
+  <main>
+    <pv-card>
+      <template #header>
+        <img alt="user header" src="./assets/images/profile-pic.jpeg">
+      </template>
+      <template #title>
+        Advanced Card
+      </template>
+      <template #content>
+        {{ $t('card-content') }}
+      </template>
+      <template #footer>
+        <pv-button :label="$t('submit')" icon="pi pi-check"/>
+        <pv-button :label="$t('read-more')" class="p-button-secondary" icon="pi pi-times" label="Cancel"
+                   style="margin-left: .5em"/>
+      </template>
+    </pv-card>
+  </main>
 
 </template>
 
