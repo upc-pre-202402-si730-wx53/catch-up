@@ -1,29 +1,59 @@
-<script setup>
+<script>
 import LanguageSwticher from "@/public/components/language-switcher.component.vue";
+import SourceList from "@/news/components/source-list.component.vue";
+
+export default {
+  name: 'App',
+  components: {
+    LanguageSwticher,
+    SourceList
+  },
+  data() {
+    return {
+      drawerVisible: true
+    }
+  },
+  methods: {
+    setSource(source) {
+      console.log(source);
+    }
+  }
+}
 </script>
 
 <template>
-  <header>
-    <language-swticher></language-swticher>
-  </header>
+  <div>
+    <div>
+      <pv-menubar>
+        <template #start>
+          <source-list v-model:visible="drawerVisible" v-on:source-selected="setSource"></source-list>
+        </template>
+        <template #end>
+          <language-swticher></language-swticher>
+        </template>
+      </pv-menubar>
+    </div>
 
-  <main>
-    <pv-card>
-      <template #header>
-        <img alt="user header" src="./assets/images/profile-pic.jpeg">
-      </template>
-      <template #title>
-        Advanced Card
-      </template>
-      <template #content>
-        {{ $t('card-content') }}
-      </template>
-      <template #footer>
-        <pv-button icon="pi pi-check" :label="$t('submit')"  />
-        <pv-button icon="pi pi-times" :label="$t('read-more')" label="Cancel" class="p-button-secondary" style="margin-left: .5em"/>
-      </template>
-    </pv-card>
-  </main>
+    <main>
+      <pv-card>
+        <template #header>
+          <img alt="user header" src="./assets/images/profile-pic.jpeg">
+        </template>
+        <template #title>
+          Advanced Card
+        </template>
+        <template #content>
+          {{ $t('card-content') }}
+        </template>
+        <template #footer>
+          <pv-button :label="$t('submit')" icon="pi pi-check"/>
+          <pv-button :label="$t('read-more')" class="p-button-secondary" icon="pi pi-times" label="Cancel"
+                     style="margin-left: .5em"/>
+        </template>
+      </pv-card>
+    </main>
+  </div>
+
 </template>
 
 <style scoped>
